@@ -1,7 +1,17 @@
 connection: "the_look"
 
 # include all the views
-include: "/views/**/*.view"
+include: "/views/billion_orders.view"
+include: "/views/events.view"
+include: "/views/flights.view"
+include: "/views/inventory_items.view"
+include: "/views/order_items.view"
+include: "/views/orders.view"
+include: "/views/products.view"
+include: "/views/schema_migrations.view"
+include: "/views/ten_million_orders.view"
+include: "/views/user_data.view"
+include: "/views/users.view"
 
 datagroup: looker_learning_tutorials_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -84,14 +94,16 @@ explore: schema_migrations {}
 
 explore: users {}
 
+explore: tests {}
+
 explore: orders {}
 
 explore: orders_two {
   from: orders
-  fields: [ALL_FIELDS*,-users.age,-users.state]
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
+    fields: [users.id]
   }
 }
