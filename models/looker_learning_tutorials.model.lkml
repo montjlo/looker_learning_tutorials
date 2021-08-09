@@ -10,19 +10,7 @@ datagroup: looker_learning_tutorials_default_datagroup {
 
 persist_with: looker_learning_tutorials_default_datagroup
 
-explore: billion_orders {
-  join: orders {
-    type: left_outer
-    sql_on: ${billion_orders.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+explore: billion_orders {}
 
 explore: events {
   join: users {
@@ -68,14 +56,6 @@ explore: order_items {
   }
 }
 
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: ten_million_orders {
   join: orders {
     type: left_outer
@@ -103,3 +83,15 @@ explore: products {}
 explore: schema_migrations {}
 
 explore: users {}
+
+explore: orders {}
+
+explore: orders_two {
+  from: orders
+  fields: [ALL_FIELDS*,-users.age,-users.state]
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+}

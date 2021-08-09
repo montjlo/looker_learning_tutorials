@@ -33,10 +33,21 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: west_coast_user_id {
+    type: number
+    sql: CASE WHEN ${users.state} = "California" OR ${users.state} = "Oregon" OR ${users.state} = "Washington" THEN ${id} ELSE NULL END ;;
+  }
+
+  dimension: customer_is_senior {
+    type: yesno
+    sql: ${user.ages} >= 65 ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
