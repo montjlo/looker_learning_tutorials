@@ -11,7 +11,7 @@ include: "/views/products.view"
 include: "/views/schema_migrations.view"
 include: "/views/ten_million_orders.view"
 include: "/views/user_data.view"
-include: "/views/users.view"
+include: "/views/test.view"
 
 datagroup: looker_learning_tutorials_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -94,7 +94,7 @@ explore: schema_migrations {}
 
 explore: users {}
 
-explore: tests {}
+explore: test {}
 
 explore: orders {}
 
